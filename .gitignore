@@ -83,3 +83,9 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+gradle/wrapper/gradle-wrapper.jar
+.idea/androidTestResultsUserPreferences.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+gradle/wrapper/gradle-wrapper.jar
