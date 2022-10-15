@@ -6,7 +6,6 @@ import androidx.test.espresso.action.ViewActions.*
 import com.example.android.testing.espresso.BasicSample.R
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.example.android.testing.espresso.BasicSample.base.BaseTest
 import org.junit.Assert
