@@ -1,14 +1,14 @@
 version: 2.1
 
 orbs:
-  android: circleci/android@1.0.3
-  gcp-cli: circleci/gcp-cli@2.2.0
+  android: circleci/android@2.1.2
+  gcp-cli: circleci/gcp-cli@2.4.1
 
 jobs:
   unit-test:
     executor:
       name: android/android-machine
-      resource-class: xlarge
+      resource-class: large
     steps:
       - checkout
       - android/restore-gradle-cache
@@ -35,7 +35,7 @@ jobs:
         default: system-images;android-30;google_apis;x86
     executor:
       name: android/android-machine
-      resource-class: xlarge
+      resource-class: large
     steps:
       - checkout
       - android/start-emulator-and-run-tests:
