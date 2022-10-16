@@ -31,6 +31,6 @@ but no guarantee that it is accessible for non members. I am using a trial accou
 
 ![Browserstack Dashboard](browserstack_dashbaord.png)
 
-![Browserstack Email](browserstack_dashbaord.png)
+![Browserstack Email](browserstack_email.png)
 
 
