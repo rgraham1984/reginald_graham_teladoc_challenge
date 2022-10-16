@@ -4,11 +4,11 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import com.example.android.testing.espresso.BasicSample.R
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.example.android.testing.espresso.BasicSample.MainActivity
+import com.example.android.testing.espresso.BasicSample.R
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -26,11 +26,11 @@ open class BaseTest {
     @get:Rule
     open var activityScenarioRule = activityScenarioRule<MainActivity>()
 
-    lateinit var device:UiDevice
+    lateinit var device: UiDevice
 
     @Before
     @Throws(Exception::class)
-    open fun setUp(){
+    open fun setUp() {
 
         // Verify layout correct prior to verifying functionality
         verifyMainActivityUI()
@@ -40,13 +40,13 @@ open class BaseTest {
     }
 
     @After
-    open fun tearDown(){
+    open fun tearDown() {
 
         // Add any logic that would be beneficial during the teardown of the test
 
     }
 
-    fun verifyMainActivityUI(){
+    fun verifyMainActivityUI() {
 
         onView(withId(R.id.textToBeChanged)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
@@ -58,14 +58,13 @@ open class BaseTest {
 
     }
 
-
     /**
      * The sample code does not display the open activity change text when in landscape on my
      * available devices.This looks to be a bug in their code or unhandled user case. I created
      * this function to verify the UI that is displayed in landscape.
      *
      */
-    fun verifyMainActivityUIReturningFromShowTextLand(){
+    fun verifyMainActivityUIReturningFromShowTextLand() {
 
         onView(withId(R.id.textToBeChanged)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 

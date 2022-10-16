@@ -1,0 +1,7 @@
+{
+  "devices": ["Samsung Galaxy S9 Plus-9.0"],
+  "project": "EspressoGradleBuild",
+  "shards": {
+    "numberOfShards": 2
+  }
+}

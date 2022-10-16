@@ -52,6 +52,20 @@ jobs:
       - store_artifacts:
           path: ~/test-results/junit
 
+  browserstack-test:
+    parameters:
+      system-image:
+        type: string
+        default: system-images;android-30;google_apis;x86
+    executor:
+      name: android/android-machine
+      resource-class: large
+    steps:
+      - checkout
+      - run:
+          name: Run test on Browserstack device
+          command: ./gradlew clean executeDebugTestsOnBrowserstack
+
 workflows:
   test-and-build:
     jobs:
@@ -69,3 +83,4 @@ workflows:
                 - system-images;android-24;google_apis;x86
                 - system-images;android-23;google_apis;x86
           name: android-test-<<matrix.system-image>>
+      - browserstack-test
