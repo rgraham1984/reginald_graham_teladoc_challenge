@@ -1,7 +1,6 @@
 package com.example.android.testing.espresso.BasicSample.ui
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -15,159 +14,176 @@ class BasicNavigationTest : BaseTest() {
 
     companion object {
 
-        const val TEST_STRING = "This is a test"
+        val testData = listOf("This is a test", "012345", "!@#$%^&*()_+")
     }
 
     @Test
     fun verifyMainActivityTest() {
 
-        // Ensure the device is in Portrait
-        Assert.assertTrue(device.isNaturalOrientation)
+        for (s in testData) {
 
-        // Verify text field is empty and hint is displayed
-        verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
+            // Ensure the device is in Portrait
+            Assert.assertTrue(device.isNaturalOrientation)
 
-        // Enter string and click change button
-        enterTextIntoTextField(R.id.editTextUserInput)
-        clickChangeButton(R.id.changeTextBt)
+            // Verify text field is empty and hint is displayed
+            verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
 
-        // Verify test string is displayed
-        verifyTextStringIsDisplayed(R.id.textToBeChanged)
+            // Enter string and click change button
+            enterTextIntoTextField(R.id.editTextUserInput, s)
+            clickChangeButton(R.id.changeTextBt)
 
-        // Clear text from text field
-        clearTextField(R.id.editTextUserInput)
+            // Verify test string is displayed
+            verifyTextStringIsDisplayed(R.id.textToBeChanged, s)
 
-        // Set to landscape orientation
-        device.setOrientationLeft()
+            // Clear text from text field
+            clearTextField(R.id.editTextUserInput)
 
-        // Verify text field is empty and hint is displayed
-        verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
+            // Set to landscape orientation
+            device.setOrientationLeft()
 
-        // Enter string and click change button
-        enterTextIntoTextField(R.id.editTextUserInput)
-        clickChangeButton(R.id.changeTextBt)
+            // Verify text field is empty and hint is displayed
+            verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
 
-        // Ensure the test string id displayed
-        verifyTextStringIsDisplayed(R.id.textToBeChanged)
+            // Enter string and click change button
+            enterTextIntoTextField(R.id.editTextUserInput, s)
+            clickChangeButton(R.id.changeTextBt)
 
-        // Clear text from text field
-        clearTextField(R.id.editTextUserInput)
+            // Ensure the test string id displayed
+            verifyTextStringIsDisplayed(R.id.textToBeChanged, s)
 
-        // Set the device back to Portrait
-        device.setOrientationNatural()
+            // Clear text from text field
+            clearTextField(R.id.editTextUserInput)
 
-        // Ensure the device is in Portrait
-        Assert.assertTrue(device.isNaturalOrientation)
+            // Set the device back to Portrait
+            device.setOrientationNatural()
+
+            // Ensure the device is in Portrait
+            Assert.assertTrue(device.isNaturalOrientation)
+        }
 
     }
 
     @Test
     fun verifyShowTextActivityTest() {
 
-        // Ensure the device is in Portrait
-        Assert.assertTrue(device.isNaturalOrientation)
+        for (s in testData) {
 
-        // Verify text field is empty and hint is displayed
-        verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
+            // Ensure the device is in Portrait
+            Assert.assertTrue(device.isNaturalOrientation)
 
-        // Enter string
-        enterTextIntoTextField(R.id.editTextUserInput)
+            // Verify text field is empty and hint is displayed
+            verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
 
-        // Click activity change button
-        onView(withId(R.id.activityChangeTextBtn)).perform(click())
+            // Enter string
+            enterTextIntoTextField(R.id.editTextUserInput, s)
 
-        // Now in the Show text activity
-        verifyShowActivityScreenDisplaysTestString(R.id.show_text_view)
+            // Click activity change button
+            onView(withId(R.id.activityChangeTextBtn)).perform(click())
 
-        // Return to main activity to verify back stack functionality
-        returnToMainActivity()
+            // Now in the Show text activity
+            verifyTextStringIsDisplayed(R.id.show_text_view, s)
 
-        // Clear text from text field
-        clearTextField(R.id.editTextUserInput)
+            // Return to main activity to verify back stack functionality
+            returnToMainActivity()
 
-        // Verify text field is empty and hint is displayed
-        verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
+            // Clear text from text field
+            clearTextField(R.id.editTextUserInput)
 
-        // Enter string
-        enterTextIntoTextField(R.id.editTextUserInput)
+            // Verify text field is empty and hint is displayed
+            verifyTextIsEmpty(R.id.editTextUserInput, R.string.type_something)
 
-        // Verify change button id displayed after closing keyboard
-        onView(withId(R.id.activityChangeTextBtn)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            // Enter string
+            enterTextIntoTextField(R.id.editTextUserInput, s)
 
-        // Click change button
-        onView(withId(R.id.activityChangeTextBtn)).perform(click())
+            // Verify change button id displayed after closing keyboard
+            onView(withId(R.id.activityChangeTextBtn)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-        // Set to landscape orientation
-        device.setOrientationLeft()
+            // Click change button
+            onView(withId(R.id.activityChangeTextBtn)).perform(click())
 
-        // Now in the Show text activity
-        verifyShowActivityScreenDisplaysTestString(R.id.show_text_view)
+            // Set to landscape orientation
+            device.setOrientationLeft()
 
-        // Return to main activity to verify back stack functionality
-        returnToMainActivityLandscape()
+            // Now in the Show text activity
+            verifyTextStringIsDisplayed(R.id.show_text_view, s)
 
-        // Clear text from text field
-        clearTextField(R.id.editTextUserInput)
+            // Return to main activity to verify back stack functionality
+            returnToMainActivityLandscape()
 
-        // Set the device back to Portrait
-        device.setOrientationNatural()
+            // Clear text from text field
+            clearTextField(R.id.editTextUserInput)
 
-        // Ensure the device is in Portrait
-        Assert.assertTrue(device.isNaturalOrientation)
+            // Set the device back to Portrait
+            device.setOrientationNatural()
+
+            // Ensure the device is in Portrait
+            Assert.assertTrue(device.isNaturalOrientation)
+        }
 
     }
 
+    /**
+     * Clicks the hardware up button to return to the main activity and verifies elements
+     */
     private fun returnToMainActivity() {
         // Press back to return back to the main activity
         device.pressBack()
         verifyMainActivityUI()
     }
 
+    /**
+     * Clicks the hardware up button to return to the main activity from the landscape orientation
+     */
     private fun returnToMainActivityLandscape() {
         device.pressBack()
         verifyMainActivityUIReturningFromShowTextLand()
     }
 
-    private fun verifyTextIsEmpty(id: Int, hint: Int) {
-        onView(withId(id)).check(
+    /**
+     * Verify text field is empty and hint text is displayed before entering text
+     */
+    private fun verifyTextIsEmpty(textFieldId: Int, hintText: Int) {
+        onView(withId(textFieldId)).check(
             ViewAssertions.matches(
-                ViewMatchers.withHint(hint)
+                ViewMatchers.withHint(hintText)
             )
         )
     }
 
-    private fun enterTextIntoTextField(id: Int) {
-        onView(withId(id))
-            .perform(typeText(TEST_STRING), ViewActions.closeSoftKeyboard())
+    /**
+     * Enter text into the text field
+     */
+    private fun enterTextIntoTextField(textFieldId: Int, testString: String) {
+        onView(withId(textFieldId))
+            .perform(typeText(testString), closeSoftKeyboard())
     }
 
-    private fun clickChangeButton(id: Int) {
-        onView(withId(id))
+    /**
+     * Clicks the change text button
+     */
+    private fun clickChangeButton(changeTextButtonId: Int) {
+        onView(withId(changeTextButtonId))
             .perform(click())
     }
 
-    private fun verifyTextStringIsDisplayed(id: Int) {
-        onView(withId(id)).check(
+    /**
+     * The text that was entered into the text field is displayed in text view
+     */
+    private fun verifyTextStringIsDisplayed(headerTextViewId: Int, testString: String) {
+        onView(withId(headerTextViewId)).check(
             ViewAssertions.matches(
                 ViewMatchers.withText(
-                    TEST_STRING
+                    testString
                 )
             )
         )
     }
 
-    private fun verifyShowActivityScreenDisplaysTestString(id: Int) {
-        onView(withId(id)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withText(
-                    TEST_STRING
-                )
-            )
-        )
-    }
-
-    private fun clearTextField(id: Int) {
-        onView(withId(id))
+    /**
+     * Clears the text field
+     */
+    private fun clearTextField(textFieldId: Int) {
+        onView(withId(textFieldId))
             .perform(clearText())
     }
 }

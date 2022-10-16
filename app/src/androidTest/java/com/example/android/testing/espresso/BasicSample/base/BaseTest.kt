@@ -35,6 +35,7 @@ open class BaseTest {
         // Verify layout correct prior to verifying functionality
         verifyMainActivityUI()
 
+        // Reference to the device so that we can change orientation and utilize hardware up
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     }
@@ -46,6 +47,9 @@ open class BaseTest {
 
     }
 
+    /**
+     * This code verifies that all of the UI displayed expected on the main activity is displayed
+     */
     fun verifyMainActivityUI() {
 
         onView(withId(R.id.textToBeChanged)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
